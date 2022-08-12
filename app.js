@@ -1,28 +1,16 @@
-// import functions and grab DOM elements
-
-// let state
-
-// set event listeners 
-// get user input
-// use user input to update state 
-// update DOM to reflect the new state
 import { getPolls, createPoll } from './fetch-utils.js';
-import { renderPoll, renderOption } from './render-utils.js';
+import { renderPoll } from './render-utils.js';
 
-const pollForm = document.querySelector('poll-form');
-const pastPolls = document.querySelector('past-polls');
+const pollForm = document.getElementById('poll-form');
+const pastPollsEl = document.getElementById('past-polls');
 
-const optionAPlusBtn = document.querySelector('option-a-plus');
-const optionAMinusBtn = document.querySelector('option-a-minus');
-const optionBPlusBtn = document.querySelector('option-b-plus');
-const optionBMinusBtn = document.querySelector('option-b-minus');
-const savePollBtn = document.querySelector('save-poll');
+const optionAPlusBtn = document.getElementById('option-a-plus');
+const optionAMinusBtn = document.getElementById('option-a-minus');
+const optionBPlusBtn = document.getElementById('option-b-plus');
+const optionBMinusBtn = document.getElementById('option-b-minus');
+const savePollBtn = document.getElementById('save-poll');
 
-const pollDisplay = document.querySelector('poll-display');
-const questionDisplay = document.querySelector('question-display');
-const optionADisplay = document.getElementById('option-a-display');
-const optionBDisplay = document.getElementById('option-b-display');
-
+const pollDisplay = document.getElementById('poll-display');
 
 let question = '';
 let optionA = '';
@@ -31,92 +19,96 @@ let votesA = 0;
 let votesB = 0;
 
 pollForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const data = new FormData(pollForm);
-  question = data.get('question-input');
-  optionA = data.get('option-a-input');
-  optionB = data.get('option-b-input');
+    e.preventDefault();
+    const data = new FormData(pollForm);
 
-  pollForm.reset();
-  displayCurrentPoll();
-  //console.log(question, 'post button event listener working');
+    const userQuestion = data.get('question-input');
+    const userOptionA = data.get('option-a-input');
+    const userOptionB = data.get('option-b-input');
+
+    question = userQuestion;
+    optionA = userOptionA;
+    optionB = userOptionB;
+
+    pollForm.reset();
+    renderPoll();
+    displayCurrentPoll();
 });
 
 optionAPlusBtn.addEventListener('click', () => {
-  votesA++;
-  displayCurrentPoll();
-  //console.log(votesA);
+    votesA++;
+    displayCurrentPoll();
 });
 
 optionAMinusBtn.addEventListener('click', () => {
-  if (votesA > 0) {
-    votesA--;
-  }
-  displayCurrentPoll();
+    if (votesA > 0) {
+        votesA--;
+    }
+    displayCurrentPoll();
 });
 
 optionBPlusBtn.addEventListener('click', () => {
-  votesB++;
-  displayCurrentPoll();
+    votesB++;
+    displayCurrentPoll();
 });
 
 optionBMinusBtn.addEventListener('click', () => {
-  if (votesB > 0) {
-    votesB--;
-  }
-  displayCurrentPoll();
+    if (votesB > 0) {
+        votesB--;
+    }
+    displayCurrentPoll();
 });
 
 savePollBtn.addEventListener('click', async () => {
 
-  const data = {
-    question,
-    optionA,
-    optionB,
-    votesA,
-    votesB,
-  };
+    const data = {
+        question: question,
+        optionA: optionA,
+        optionB: optionB,
+        votesA: votesA,
+        votesB: votesB,
+    };
 
-  const response = await createPoll(data);
-  question = '';
-  optionA = '';
-  optionB = '';
-  votesA = 0;
-  votesB = 0;
+    await createPoll(data);
 
-  displayAllPolls();
+    displayAllPolls();
 
-  displayCurrentPoll();
-  //console.log('save poll btn working');
+    question = '';
+    optionA = '';
+    optionB = '';
+    votesA = 0;
+    votesB = 0;
+
+    displayCurrentPoll();
 });
 
 window.addEventListener('', async () => {
-  await displayAllPolls();
-  displayCurrentPoll();
+    await displayAllPolls();
+    displayCurrentPoll();
 });
 
 function displayCurrentPoll() {
-  pollDisplay.textContent = '';
 
-  questionDisplay.textContent = question;
-  optionADisplay.textContent = optionA;
-  optionBDisplay.textContent = optionB;
+    pollDisplay.textContent = '';
 
-  const pollEl = renderPoll({ question, optionA, optionB, votesA, votesB });
-  pollEl.classList.add('current-poll');
-  pollDisplay.append(pollEl);
-  //console.log('display poll working');
+    const pollEl = renderPoll(question, optionA, optionB, votesA, votesB);
+    pollEl.classList.add('current-poll');
+    pollDisplay.append(pollEl);
 }
 
 async function displayAllPolls() {
 
-  const polls = await getPolls();
+    pollDisplay.textContent = '';
+    pastPollsEl.textContent = '';
 
-  for (let poll of polls) {
-    const pollEl = renderPoll(poll);
+    const polls = await getPolls();
 
-    pastPolls.append(pollEl);
-  }
+    for (let poll of polls) {
+        const pastPolls = renderPoll(poll.question, poll.optionA, poll.optionB, poll.votesA, poll.votesB);
+
+        pastPollsEl.append(pastPolls);
+    }
 }
 
 displayCurrentPoll();
+displayAllPolls();

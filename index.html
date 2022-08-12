@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <link rel="icon" type="image/x-icon" href="/assets/alchemy-favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,51 +13,53 @@
         href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600&family=Titillium+Web:wght@200;400;600&display=swap">
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/global.css" />
-    <title>Web App</title>
+    <title>Supabase Poll Tracker</title>
 </head>
 
 <body>
     <header>
         <img src="/assets/html_css_js.png">
-        <h1>Web App</h1>
+        <h1>Supabase Poll Tracker</h1>
     </header>
 
     <main>
         <section class="left">
             <h2>Current Poll</h2>
-            <div class="poll-display"></div>
-            <div class="question-display"></div>
+            <span id="poll-display" class="poll-display">
+                <!--<h3 id="question-display"></h3>
+                    <h3 id="option-a-display"></h3>
+                    <h3 id="option-b-display"></h3>-->
+            </span>
             <div class="current-poll-buttons">
                 <div class="left-buttons">
-                    <h3 id="option-a-display"></h3>
-                    <button class="option-a-plus">A++</button>
-                    <button class="option-a-minus">A--</button>
-                    <button class="hidden-button">A--!</button>
+
+                    <button class="option-a-plus" id="option-a-plus">A++</button>
+                    <button class="option-a-minus" id="option-a-minus">A--</button>
                 </div>
                 <div class="right-buttons">
-                    <h3 id="option-b-display"></h3>
-                    <button class="option-b-plus">B++</button>
-                    <button class="option-b-minus">B--</button>
+
+                    <button class="option-b-plus" id="option-b-plus">B++</button>
+                    <button class="option-b-minus" id="option-b-minus">B--</button>
                 </div>
                 <div class="save-button">
-                    <button class="save-poll">Save poll</button>
+                    <button class="save-poll" id="save-poll">Save poll</button>
                 </div>
             </div>
             <div class="form-div">
-                <form name="poll-form">
+                <form id="poll-form">
                     <label for="question-input"></label>
                     <input name="question-input" type="text" placeholder="Enter poll question">
                     <label for="option-a-input"></label>
                     <input name="option-a-input" type="text" placeholder="Enter first option">
                     <label for="option-b-input"></label>
                     <input name="option-b-input" type="text" placeholder="Enter second option">
-                    <button>Post poll</button>
+                    <button id="post-poll-button">Post poll</button>
                 </form>
             </div>
         </section>
         <section class="right">
             <h2>Past Polls</h2>
-            <div class="past-polls"></div>
+            <div id="past-polls"></div>
         </section>
     </main>
 

@@ -4,7 +4,7 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 export async function createPoll(data) {
-    const response = await client.from('polls').insert(data);
+    const response = await client.from('otherPolls').insert(data);
     if (response.error) {
         throw new Error(response.error.message);
     }
@@ -12,9 +12,6 @@ export async function createPoll(data) {
 }
 
 export async function getPolls() {
-    const response = await client.from('polls').select('*');
-    if (response.error) {
-        throw new ErrorEvent(response.error.message);
-    }
+    const response = await client.from('otherPolls').select('*');
     return response.data;
 }
