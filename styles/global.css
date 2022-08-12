@@ -22,6 +22,83 @@ header {
 
 main {
     padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+button {
+    padding: 10px;
+
+}
+
+.poll-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 475px;
+    background-color: white;
+    border: 2px solid rgb(177, 0, 0);
+}
+
+.past-polls {
+    width: 300px;
+    height: 800px;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(177, 0, 0);
+}
+
+h2 {
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.current-poll-buttons {
+    display: grid;
+    grid-template-columns: 150px 1fr 150px;
+    grid-template-rows: 3, 1fr;
+    grid-template-areas:
+        "abtn hidden bbtn"
+        "abtn hidden bbtn"
+        "hidden svbtn hidden";
+    box-sizing: border-box;
+}
+
+.hidden-button {
+    visibility: hidden;
+}
+
+.option-a-plus {
+    grid-area: 'abtn';
+    padding: 5px;
+    margin: 5px;
+}
+
+.option-a-minus {
+    grid-area: 'abtn';
+    padding: 5px;
+    margin: 5px;
+}
+
+.option-b-plus {
+    grid-area: 'bbtn';
+    padding: 5px;
+    margin: 5px;
+}
+
+.option-b-minus {
+    grid-area: 'bbtn';
+    padding: 5px;
+    margin: 5px;
+}
+
+.save-poll {
+    grid-area: 'svbtn';
+    width: 100%;
+    box-sizing: border-box;
 }
 
 footer {

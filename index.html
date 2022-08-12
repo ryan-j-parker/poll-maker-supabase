@@ -22,7 +22,35 @@
     </header>
 
     <main>
-
+        <section class="left">
+            <h2>Current Poll</h2>
+            <div class="poll-display"></div>
+            <div class="current-poll-buttons">
+                <button class="option-a-plus">A++</button>
+                <button class="hidden-button">A--!</button>
+                
+                <button class="option-b-plus">B++</button>
+                <button class="option-a-minus">A--</button>
+                <button class="hidden-button">hidey-ho!</button>
+                <button class="option-b-minus">B--</button>
+                <button class="hidden-button">A--!</button>
+                <button class="save-poll">Save poll</button>
+                <button class="hidden-button">A--!</button>
+                
+            </div>
+            <div class="form-div">
+                <form name="poll-form">
+                    <input name="question-input" type="text" placeholder="Enter poll question">
+                    <input name="option-a-input" type="text" placeholder="Enter first option">
+                    <input name="option-b-input" type="text" placeholder="Enter second option">
+                    <button>Submit poll</button>
+                </form>
+            </div>
+        </section>
+        <section class="right">
+            <h2>Past Polls</h2>
+            <div class="past-polls"></div>
+        </section>
     </main>
 
     <footer>&copy;2022 Software Developer</footer>
