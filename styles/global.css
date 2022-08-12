@@ -71,6 +71,12 @@ h2 {
     visibility: hidden;
 }
 
+.poll-display {
+    color: black;
+    font-size: 2rem;
+    background-color: rgba(0, 128, 0, 0.459);
+}
+
 .option-a-plus {
     grid-area: 'abtn';
     padding: 5px;

@@ -25,25 +25,32 @@
         <section class="left">
             <h2>Current Poll</h2>
             <div class="poll-display"></div>
+            <div class="question-display"></div>
             <div class="current-poll-buttons">
-                <button class="option-a-plus">A++</button>
-                <button class="hidden-button">A--!</button>
-                
-                <button class="option-b-plus">B++</button>
-                <button class="option-a-minus">A--</button>
-                <button class="hidden-button">hidey-ho!</button>
-                <button class="option-b-minus">B--</button>
-                <button class="hidden-button">A--!</button>
-                <button class="save-poll">Save poll</button>
-                <button class="hidden-button">A--!</button>
-                
+                <div class="left-buttons">
+                    <h3 id="option-a-display"></h3>
+                    <button class="option-a-plus">A++</button>
+                    <button class="option-a-minus">A--</button>
+                    <button class="hidden-button">A--!</button>
+                </div>
+                <div class="right-buttons">
+                    <h3 id="option-b-display"></h3>
+                    <button class="option-b-plus">B++</button>
+                    <button class="option-b-minus">B--</button>
+                </div>
+                <div class="save-button">
+                    <button class="save-poll">Save poll</button>
+                </div>
             </div>
             <div class="form-div">
                 <form name="poll-form">
+                    <label for="question-input"></label>
                     <input name="question-input" type="text" placeholder="Enter poll question">
+                    <label for="option-a-input"></label>
                     <input name="option-a-input" type="text" placeholder="Enter first option">
+                    <label for="option-b-input"></label>
                     <input name="option-b-input" type="text" placeholder="Enter second option">
-                    <button>Submit poll</button>
+                    <button>Post poll</button>
                 </form>
             </div>
         </section>
